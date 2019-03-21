@@ -4,7 +4,7 @@
 #include <algorithm>
 
 #include <utils.hpp>
-#include <linkedlist.hpp>
+#include <structures/linkedlist.hpp>
 #include <algorithms.hpp>
 
 namespace cs {

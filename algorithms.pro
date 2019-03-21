@@ -8,12 +8,12 @@ CONFIG += console
 
 HEADERS += ./algorithms.hpp \
     ./helper/algorithmstests.hpp \
-    ./linkedlist.hpp \
+    ./structures/linkedlist.hpp \
     ./helper/linkedlisttests.hpp \
     ./tests.hpp \
     ./utils.hpp \
     ./helper/taskstests.hpp \
-    $$PWD/forwardlist.hpp \
+    ./structures/forwardlist.hpp \
     framework.hpp
 
 SOURCES += ./main.cpp
