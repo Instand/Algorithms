@@ -39,7 +39,7 @@ namespace cs {
     void swap(T& lhs, T& rhs) {
         T temp = std::move(lhs);
         lhs = std::move(rhs);
-        lhs = std::move(temp);
+        rhs = std::move(temp);
     }
 
     bool isHex(const std::string& str) {

@@ -13,6 +13,7 @@ HEADERS += ./algorithms.hpp \
     ./tests.hpp \
     ./utils.hpp \
     ./helper/taskstests.hpp \
-    $$PWD/forwardlist.hpp
+    $$PWD/forwardlist.hpp \
+    framework.hpp
 
 SOURCES += ./main.cpp
