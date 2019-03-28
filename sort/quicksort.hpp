@@ -4,6 +4,14 @@
 #include <utility>
 #include <iterator>
 
+// worst-case O(n^2)
+// avarage-case O(n log n)
+// best-case O(n log n)
+
+// memory space O(n log n)
+
+// not stable
+
 namespace cs {
     template <typename Iterator>
     std::pair<Iterator, Iterator> hoarePartition(Iterator begin, Iterator end) {

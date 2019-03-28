@@ -7,6 +7,6 @@ int main() {
     cs::testAlgorithms();
     cs::testTasks();
 
-    std::cout << std::endl;
+    cs::Console::writeLine("All test cases OK");
     return 0;
 }

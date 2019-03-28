@@ -3,8 +3,17 @@
 
 #include <iterator>
 
+// also known as gnome sort
+
+// worst-case O(n^2)
+// avarage-case O(n^2)
+// best-case O(n)
+
+// memory space O(1)
+
+// not stable
+
 namespace cs {
-    // also known as gnome sort
     template <typename Iterator>
     void stupidSort(Iterator begin, Iterator end) {
         for (Iterator i = begin; std::next(i) != end;) {

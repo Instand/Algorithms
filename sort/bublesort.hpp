@@ -3,6 +3,14 @@
 
 #include <iterator>
 
+// worst-case O(n^2)
+// avarage-case O(n^2)
+// best-case O(n)
+
+// memory space O(1)
+
+// not stable
+
 namespace cs {
     template <typename Iterator>
     void bubleSort(Iterator begin, Iterator end) {
