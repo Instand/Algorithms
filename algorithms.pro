@@ -14,6 +14,10 @@ HEADERS += ./algorithms.hpp \
     ./utils.hpp \
     ./helper/taskstests.hpp \
     ./structures/forwardlist.hpp \
-    framework.hpp
+    framework.hpp \
+    sort/stupidsort.hpp \
+    sort/bublesort.hpp \
+    sort/quicksort.hpp \
+    sort/mergesort.hpp
 
 SOURCES += ./main.cpp

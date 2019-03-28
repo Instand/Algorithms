@@ -17,7 +17,7 @@ namespace cs {
         };
 
         using Type = std::remove_cv<T>;
-        using IteratorBase = std::iterator<std::bidirectional_iterator_tag, Type>;
+        using IteratorBase = std::iterator<std::bidirectional_iterator_tag, Type>;  // deprecated in C++17
 
         class Iterator : public IteratorBase {
         public:

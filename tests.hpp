@@ -18,10 +18,13 @@ namespace cs {
         Framework::execute(&cs::LinkedListTests::testReverse, "Linked list reverse failed");
     }
 
-    void testAlgorithms() {
+    void testSorts() {
         Framework::execute(&cs::AlgorithmsTests::testBubleSort, "Buble sort failed");
         Framework::execute(&cs::AlgorithmsTests::testStupidSort, "Stupid sort failed");
         Framework::execute(&cs::AlgorithmsTests::testQuickSort, "Quick sort tests failed");
+    }
+
+    void testAlgorithms() {
         Framework::execute(&cs::AlgorithmsTests::testHex, "Hex tests failed");
         Framework::execute(&cs::AlgorithmsTests::testPrime, "Primes tests failed");
         Framework::execute(&cs::AlgorithmsTests::testFactorial, "Factorial tests failed");

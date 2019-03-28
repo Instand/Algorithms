@@ -8,7 +8,6 @@
 #define forever for (;;)
 
 namespace cs {
-    // go to each element
     template <typename Iterator, typename Func>
     void forEach(Iterator begin, Iterator end, Func func) {
         while (begin != end) {
@@ -60,74 +59,6 @@ namespace cs {
         }
 
         return result;
-    }
-
-    // also known as gnome sort
-    template <typename Iterator>
-    void stupidSort(Iterator begin, Iterator end) {
-        for (Iterator i = begin; std::next(i) != end;) {
-            Iterator next = std::next(i);
-
-            if (*i > *next) {
-                std::iter_swap(i, next);
-
-                if (i != begin) {
-#ifndef NDEBUG
-                    if (std::prev(i) == begin) {
-                        i = std::prev(i);
-                        continue;
-                    }
-#endif
-                    i = std::prev(i, 2);
-                }
-            }
-
-            ++i;
-        }
-    }
-
-    template <typename Iterator>
-    void bubleSort(Iterator begin, Iterator end) {
-        auto e = end;
-        for (Iterator i = begin; std::next(i) != end; ++i) {
-            for (Iterator j = begin; j != std::prev(e); ++j) {
-                Iterator next = std::next(j);
-
-                if (*j > *next) {
-                    std::iter_swap(j, next);
-                }
-            }
-        }
-    }
-
-    template <typename Iterator>
-    std::pair<Iterator, Iterator> hoarePartition(Iterator begin, Iterator end) {
-        Iterator b = begin;
-        Iterator e = end;
-        Iterator pivot = b++;
-
-        while (b != e) {
-            if (*b < *pivot) {
-                ++b;
-            }
-            else {
-                while ((b != --e) && (*pivot < *e));
-                std::iter_swap(b, e);
-            }
-        }
-
-        --b;
-        std::iter_swap(begin, b);
-        return std::make_pair(b, e);
-    }
-
-    template <typename Iterator>
-    void quickSort(Iterator begin, Iterator end) {
-      if (begin != end) {
-        auto [b, e] = hoarePartition(begin, end);
-        quickSort(begin, b);
-        quickSort(e, end);
-      }
     }
 
     std::vector<size_t> prime(size_t n) {
@@ -194,15 +125,6 @@ namespace cs {
         }
 
         return value * recursiveFactorial(value - 1);
-    }
-
-    template <typename Iterator>
-    void mergeSort(Iterator begin, Iterator end) {
-        if (begin == end) {
-            return;
-        }
-
-        Iterator medium = std::next(begin, std::distance(begin, end));
     }
 }
 

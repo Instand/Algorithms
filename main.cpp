@@ -3,6 +3,7 @@
 
 int main() {
     cs::testLinkedList();
+    cs::testSorts();
     cs::testAlgorithms();
     cs::testTasks();
 

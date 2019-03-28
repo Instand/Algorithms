@@ -9,7 +9,10 @@ namespace cs {
         template<typename Func>
         static void execute(Func func, const std::string& message) {
             if (!cs::Benchmark::run(func)) {
-                cs::Console::writeLine(message);
+                cs::Console::writeLine("\n", message);
+                cs::Console::writeLine("Failed running other tests, fix previous test to correct execution");
+
+                std::exit(0);
             }
         }
     };

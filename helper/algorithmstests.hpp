@@ -4,6 +4,10 @@
 #include <algorithms.hpp>
 #include <utils.hpp>
 
+#include <sort/stupidsort.hpp>
+#include <sort/bublesort.hpp>
+#include <sort/quicksort.hpp>
+
 #include <algorithm>
 #include <vector>
 
