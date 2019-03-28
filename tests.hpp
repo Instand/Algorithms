@@ -5,6 +5,7 @@
 
 #include <helper/linkedlisttests.hpp>
 #include <helper/algorithmstests.hpp>
+#include <helper/sortstests.hpp>
 #include <helper/taskstests.hpp>
 
 #include <framework.hpp>
@@ -19,9 +20,10 @@ namespace cs {
     }
 
     void testSorts() {
-        Framework::execute(&cs::AlgorithmsTests::testBubleSort, "Buble sort failed");
-        Framework::execute(&cs::AlgorithmsTests::testStupidSort, "Stupid sort failed");
-        Framework::execute(&cs::AlgorithmsTests::testQuickSort, "Quick sort tests failed");
+        Framework::execute(&cs::SortsTests::testBubleSort, "Buble sort failed");
+        Framework::execute(&cs::SortsTests::testStupidSort, "Stupid sort failed");
+        Framework::execute(&cs::SortsTests::testQuickSort, "Quick sort tests failed");
+        Framework::execute(&cs::SortsTests::testSelectionSort, "Selection sort tests failed");
     }
 
     void testAlgorithms() {

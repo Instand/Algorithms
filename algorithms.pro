@@ -18,6 +18,8 @@ HEADERS += ./algorithms.hpp \
     sort/stupidsort.hpp \
     sort/bublesort.hpp \
     sort/quicksort.hpp \
-    sort/mergesort.hpp
+    sort/mergesort.hpp \
+    sort/selectionsort.hpp \
+    helper/sortstests.hpp
 
 SOURCES += ./main.cpp
