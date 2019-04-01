@@ -7,6 +7,7 @@
 #include <sort/bublesort.hpp>
 #include <sort/quicksort.hpp>
 #include <sort/selectionsort.hpp>
+#include <sort/insertionsort.hpp>
 
 #include <algorithm>
 #include <vector>
@@ -26,6 +27,8 @@ namespace cs {
     public:
         static bool testQuickSort() {
             GENERATE_DATA();
+
+            cs::Console::writeLine("Start Quick sort tests");
 
             cs::Console::writeLine("Before sort: ");
             cs::Console::print(v);
@@ -79,6 +82,22 @@ namespace cs {
             cs::Console::print(v);
 
             cs::selectionSort(v.begin(), v.end());
+
+            cs::Console::writeLine("After sort: ");
+            cs::Console::print(v);
+
+            return std::is_sorted(v.begin(), v.end());
+        }
+
+        static bool testInsertionSort() {
+            GENERATE_DATA();
+
+            cs::Console::writeLine("Start Insertion sort tests");
+
+            cs::Console::writeLine("Before sort: ");
+            cs::Console::print(v);
+
+            cs::insertionSort(v.begin(), v.end());
 
             cs::Console::writeLine("After sort: ");
             cs::Console::print(v);

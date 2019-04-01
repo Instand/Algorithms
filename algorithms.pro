@@ -20,6 +20,7 @@ HEADERS += ./algorithms.hpp \
     sort/quicksort.hpp \
     sort/mergesort.hpp \
     sort/selectionsort.hpp \
-    helper/sortstests.hpp
+    helper/sortstests.hpp \
+    sort/insertionsort.hpp
 
 SOURCES += ./main.cpp

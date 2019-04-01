@@ -24,6 +24,7 @@ namespace cs {
         Framework::execute(&cs::SortsTests::testStupidSort, "Stupid sort failed");
         Framework::execute(&cs::SortsTests::testQuickSort, "Quick sort tests failed");
         Framework::execute(&cs::SortsTests::testSelectionSort, "Selection sort tests failed");
+        Framework::execute(&cs::SortsTests::testInsertionSort, "Insertion sort tests failed");
     }
 
     void testAlgorithms() {
