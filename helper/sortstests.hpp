@@ -11,98 +11,78 @@
 
 #include <algorithm>
 #include <vector>
-
-#define GENERATE_DATA()\
-    constexpr size_t size = 20;\
-    constexpr int min = 0;\
-    constexpr int max = 10000;\
-    std::vector<int> v;\
-    v.reserve(size);\
-    for (size_t i = 0; i < size; ++i) {\
-        v.push_back(cs::Generator::generateRandomValue(min, max));\
-    }\
+#include <functional>
 
 namespace cs {
-    class SortsTests {
-    public:
-        static bool testQuickSort() {
-            GENERATE_DATA();
+    class Sort;
+    class SortsTests;
 
-            cs::Console::writeLine("Start Quick sort tests");
+    class Collection {
+    public:
+        using iterator = std::vector<int>::iterator;
+
+    private:
+        static std::vector<int> generate() {
+            constexpr size_t size = 20;
+            constexpr int min = 0;
+            constexpr int max = 10000;
+
+            std::vector<int> result;
+            result.reserve(size);
+
+            for (size_t i = 0; i < size; ++i) {
+                result.push_back(cs::Generator::generateRandomValue(min, max));
+            }
+
+            return result;
+        }
+
+        friend class Sort;
+    };
+
+    class Sort {
+    public:
+        template<typename T>
+        static bool start(T sort, const std::string& name) {
+            auto collection = Collection::generate();
+
+            cs::Console::writeLine("Start ", name, " tests");
 
             cs::Console::writeLine("Before sort: ");
-            cs::Console::print(v);
+            cs::Console::print(collection);
 
-            cs::quickSort(v.begin(), v.end());
+            sort(collection.begin(), collection.end());
 
             cs::Console::writeLine("After sort: ");
-            cs::Console::print(v);
+            cs::Console::print(collection);
 
-            return std::is_sorted(v.begin(), v.end());
+            return std::is_sorted(collection.begin(), collection.end());
+        }
+    };
+
+    class SortsTests {
+        using Iter = Collection::iterator;
+        using Func = std::function<void(Iter, Iter)>;
+
+    public:
+        static bool testQuickSort() {
+            return Sort::start<Func>(&cs::quickSort<Iter>, "Quick sort");
         }
 
         static bool testBubleSort() {
-            GENERATE_DATA();
-
-            cs::Console::writeLine("Start Buble sort tests");
-
-            cs::Console::writeLine("Before sort: ");
-            cs::Console::print(v);
-
-            cs::bubleSort(v.begin(), v.end());
-
-            cs::Console::writeLine("After sort: ");
-            cs::Console::print(v);
-
-            return std::is_sorted(v.begin(), v.end());
+            return Sort::start<Func>(&cs::bubleSort<Iter>, "Buble sort");
         }
 
         static bool testStupidSort() {
-            GENERATE_DATA();
-
-            cs::Console::writeLine("Start Stupid sort tests");
-
-            cs::Console::writeLine("Before sort: ");
-            cs::Console::print(v);
-
-            cs::stupidSort(v.begin(), v.end());
-
-            cs::Console::writeLine("After sort: ");
-            cs::Console::print(v);
-
-            return std::is_sorted(v.begin(), v.end());
+            return Sort::start<Func>(&cs::stupidSort<Iter>, "Stupid sort");
         }
 
         static bool testSelectionSort() {
-            GENERATE_DATA();
-
-            cs::Console::writeLine("Start Selection sort tests");
-
-            cs::Console::writeLine("Before sort: ");
-            cs::Console::print(v);
-
-            cs::selectionSort(v.begin(), v.end());
-
-            cs::Console::writeLine("After sort: ");
-            cs::Console::print(v);
-
-            return std::is_sorted(v.begin(), v.end());
+            return Sort::start<Func>(&cs::selectionSort<Iter>, "Selection sort");
         }
 
         static bool testInsertionSort() {
-            GENERATE_DATA();
-
-            cs::Console::writeLine("Start Insertion sort tests");
-
-            cs::Console::writeLine("Before sort: ");
-            cs::Console::print(v);
-
-            cs::insertionSort(v.begin(), v.end());
-
-            cs::Console::writeLine("After sort: ");
-            cs::Console::print(v);
-
-            return std::is_sorted(v.begin(), v.end());
+            return Sort::start<Func>(&cs::insertionSort<Iter>, "Insertion sort");
         }
     };
 }
