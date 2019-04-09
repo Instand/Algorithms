@@ -8,6 +8,7 @@
 #include <sort/quicksort.hpp>
 #include <sort/selectionsort.hpp>
 #include <sort/insertionsort.hpp>
+#include <sort/mergesort.hpp>
 
 #include <algorithm>
 #include <vector>
@@ -83,6 +84,10 @@ namespace cs {
 
         static bool testInsertionSort() {
             return Sort::start<Func>(&cs::insertionSort<Iter>, "Insertion sort");
+        }
+
+        static bool testMergeSort() {
+            return Sort::start<Func>(&cs::mergeSort<Iter>, "Merge sort");
         }
     };
 }
