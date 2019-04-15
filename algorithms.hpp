@@ -5,8 +5,6 @@
 #include <vector>
 #include <iterator>
 
-#define forever for (;;)
-
 namespace cs {
     template <typename Iterator, typename Func>
     void forEach(Iterator begin, Iterator end, Func func) {

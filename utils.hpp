@@ -4,8 +4,10 @@
 #include <iostream>
 #include <utility>
 #include <random>
-#include <chrono>
 #include <string>
+#include <chrono>
+
+#define forever for(;;)
 
 namespace cs {
     struct Initializer {
@@ -76,31 +78,6 @@ namespace cs {
         template <typename T>
         static void size(const T& container) {
             writeLine(typeid (T).name(), " size ", std::size(container));
-        }
-    };
-
-    struct Benchmark {
-        template <typename Func>
-        static bool run(Func f) {
-            auto now = std::chrono::steady_clock::now();
-            cs::Console::writeLine("\nStart benchmark");
-
-            // entity
-            auto result = f();
-
-            auto difference = std::chrono::steady_clock::now() - now;
-            auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(difference);
-
-            static const char* title = "Benchmark finished, time in";
-
-            if (duration.count() != 0) {
-                cs::Console::writeLine(title, " ms ", duration.count());
-            }
-            else {
-                cs::Console::writeLine(title, " ns ", std::chrono::duration_cast<std::chrono::nanoseconds>(difference).count());
-            }
-
-            return result;
         }
     };
 }
