@@ -8,7 +8,7 @@
 // avarage-case O(n log n)
 // best-case O(n log n)
 
-// memory space O(n log n)
+// memory space O(log n)
 
 // not stable
 

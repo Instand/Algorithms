@@ -8,6 +8,7 @@
 #include <chrono>
 
 #define forever for(;;)
+#define unused(x) (void)(x)
 
 namespace cs {
     struct Initializer {

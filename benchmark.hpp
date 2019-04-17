@@ -59,7 +59,6 @@ namespace cs {
 
             const auto [difference, result] = future_->get();
             static const char* title = "Benchmark finished, time in";
-
             auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(difference);
 
             if (duration.count() != 0) {
