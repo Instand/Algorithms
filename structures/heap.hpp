@@ -27,19 +27,20 @@ namespace cs {
         template<typename Iter>
         static void fixDown(Iter begin, Iter end) {
             auto length = std::distance(begin, end);
+            auto b = begin;
 
             forever {
-                auto distance = std::distance(begin, end);
+                auto distance = std::distance(b, end);
                 auto index = length - distance;
 
                 auto k = std::next(begin, index);
                 auto j = std::next(begin, (index * 2) + 1);
 
-                if (j >= end) {
+                if (j >= end || k >= end) {
                     break;
                 }
 
-                if (j < end && (*j < *std::next(j))) {
+                if ((j < end) && (*j < *std::next(j))) {
                     ++j;
                 }
 
@@ -48,7 +49,7 @@ namespace cs {
                 }
 
                 std::iter_swap(k, j);
-                begin = j;
+                b = j;
             }
         }
     };

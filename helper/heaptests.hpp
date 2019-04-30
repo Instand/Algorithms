@@ -32,20 +32,22 @@ namespace cs {
             while (!v.empty()) {
                 const auto realMax = *std::max_element(v.begin(), v.end());
 
-                if (v.size() > 1) {
-                    const auto max = v.front();
+                const auto max = v.front();
 
-                    if (realMax != max) {
-                        cs::Console::writeLine("Real max element ", realMax, ", heap max element ", max);
-                        cs::Console::print(v);
-                        cs::Console::size(v);
+                cs::Console::writeLine("Real max element ", realMax, ", heap max element ", max);
+                cs::Console::print(v);
+                cs::Console::size(v);
 
-                        return false;
-                    }
-
-                    std::iter_swap(v.begin(), std::prev(v.end()));
-                    Heap::fixDown(v.begin(), std::prev(v.end()));
+                if (realMax != max) {
+                    return false;
                 }
+
+                std::iter_swap(v.begin(), std::prev(v.end()));
+                v.pop_back();
+
+                cs::Console::print("After swap", v);
+
+                Heap::fixDown(v.begin(), v.end());
 
                 v.pop_back();
             }
