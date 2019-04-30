@@ -21,6 +21,7 @@ namespace cs {
     class Collection {
     public:
         using iterator = std::vector<int>::iterator;
+        using array = std::vector<int>::value_type[];
 
     private:
         static std::vector<int> generate() {
@@ -43,7 +44,7 @@ namespace cs {
 
     class Sort {
     public:
-        template<typename T>
+        template<typename T, typename U = typename Collection::iterator>
         static bool start(T sort, const std::string& name) {
             auto collection = Collection::generate();
 
@@ -52,7 +53,12 @@ namespace cs {
             cs::Console::writeLine("Before sort: ");
             cs::Console::print(collection);
 
-            sort(collection.begin(), collection.end());
+            if constexpr (std::is_array_v<U>) {
+                sort(collection.data(), collection.size());
+            }
+            else {
+                sort(collection.begin(), collection.end());
+            }
 
             cs::Console::writeLine("After sort: ");
             cs::Console::print(collection);

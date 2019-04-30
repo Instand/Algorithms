@@ -4,6 +4,8 @@
 #include <iostream>
 
 #include <helper/linkedlisttests.hpp>
+#include <helper/heaptests.hpp>
+
 #include <helper/algorithmstests.hpp>
 #include <helper/sortstests.hpp>
 #include <helper/taskstests.hpp>
@@ -17,6 +19,11 @@ namespace cs {
         Framework::execute(&cs::LinkedListTests::testInsert, "Linked list insert at the head failed");
         Framework::execute(&cs::LinkedListTests::testFindAndRemove, "Linked list find and remove failed");
         Framework::execute(&cs::LinkedListTests::testReverse, "Linked list reverse failed");
+    }
+
+    void testHeap() {
+        Framework::execute(&cs::HeapTests::testFixUp, "Fix up tests failed");
+        Framework::execute(&cs::HeapTests::testFixDown, "Fix down tests failed");
     }
 
     void testSorts() {
@@ -39,6 +46,20 @@ namespace cs {
         Framework::execute(&cs::TasksTests::removeEverySecondElement, "Remove every second element tests failed");
         Framework::execute(&cs::TasksTests::mergeTwoOrderedVectors, "Merge two ordered vectors failed");
     }
+
+
+    class Tests {
+    public:
+        void run() {
+            testLinkedList();
+            testHeap();
+            testSorts();
+            testAlgorithms();
+            testTasks();
+
+            cs::Console::writeLine("All test cases OK");
+        }
+    };
 }
 
 #endif // TESTS_HPP

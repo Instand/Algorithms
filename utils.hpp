@@ -77,6 +77,12 @@ namespace cs {
         }
 
         template <typename T>
+        static void print(const std::string& message, const T& container) {
+            std::cout << message << ", size: " << container.size() << ", values ";
+            print(container);
+        }
+
+        template <typename T>
         static void size(const T& container) {
             writeLine(typeid (T).name(), " size ", std::size(container));
         }
