@@ -90,9 +90,6 @@ namespace cs {
                 return;
             }
 
-            auto length = std::distance(begin, end);
-            auto index = length/2;
-
             for (auto b = std::prev(end); b >= begin; --b) {
                 Heap::fixDown(b, end);
             }
