@@ -10,6 +10,11 @@
 namespace cs {
     class HeapTests {
     public:
+        static bool testHeapCreation() {
+            auto vector = createHeap();
+            return Heap::checkHeap(vector.begin(), vector.end());
+        }
+
         static bool testFixUp() {
             cs::Console::writeLine("Fix up test started");
 
@@ -31,7 +36,6 @@ namespace cs {
 
             while (!v.empty()) {
                 const auto realMax = *std::max_element(v.begin(), v.end());
-
                 const auto max = v.front();
 
                 cs::Console::writeLine("Real max element ", realMax, ", heap max element ", max);
@@ -49,7 +53,7 @@ namespace cs {
 
                 Heap::fixDown(v.begin(), v.end());
 
-                v.pop_back();
+                cs::Console::print("After fix down", v);
             }
 
             cs::Console::writeLine("Fix down test finished");

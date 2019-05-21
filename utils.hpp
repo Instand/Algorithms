@@ -51,7 +51,7 @@ namespace cs {
                 std::cout << element << " ";
             }
 
-            std::cout << std::endl;
+            std::cout << "[end]" << std::endl;
         }
 
         template <typename T>
@@ -85,6 +85,13 @@ namespace cs {
         template <typename T>
         static void size(const T& container) {
             writeLine(typeid (T).name(), " size ", std::size(container));
+        }
+
+
+        template <typename Iter>
+        static void print(Iter begin, Iter end) {
+            using ValueType = typename Iter::value_type;
+            print(std::vector<ValueType>{begin, end});
         }
     };
 }

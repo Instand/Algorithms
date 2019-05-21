@@ -1,26 +1,57 @@
-#ifndef PRIORITYQUEUE_HPP
-#define PRIORITYQUEUE_HPP
+#ifndef HEAP_HPP
+#define HEAP_HPP
 
 #include <vector>
+#include <utility>
+
 #include <utils.hpp>
 
 namespace cs {
     class Heap {
     public:
         template<typename Iter>
+        static bool checkHeap(Iter begin, Iter end) {
+            auto length = std::distance(begin, end);
+
+            for (Iter b = begin; b != end; ++b) {
+                auto index = length - std::distance(b, end);
+                auto [first, second] = std::make_pair(std::next(begin, (index * 2) + 1), std::next(begin, (index * 2) + 2));
+
+                if (first < end) {
+                    if ((*first) > *b) {
+                        return false;
+                    }
+                }
+
+                if (second < end) {
+                    if ((*second) > *b) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        template<typename Iter>
         static void fixUp(Iter begin, Iter end) {
-            end = std::prev(end);
+            if (begin == end) {
+                return;
+            }
+
+            auto e = std::prev(end);
+            auto length = std::distance(begin, end);
 
             while (begin != end) {
-                auto length = std::distance(begin, std::next(end));
-                auto prev = std::prev(end, length/2);
+                auto index = length - std::distance(e, end);
+                auto prev = std::next(begin, (index - 1)/2);
 
-                if ((prev < begin) || (*prev) >= (*end)) {
+                if ((prev < begin) || (*prev) >= (*e)) {
                     break;
                 }
 
-                std::iter_swap(prev, end);
-                end = prev;
+                std::iter_swap(prev, e);
+                e = prev;
             }
         }
 
@@ -40,7 +71,7 @@ namespace cs {
                     break;
                 }
 
-                if ((j < end) && (*j < *std::next(j))) {
+                if ((std::next(j) != end) && (*j < *std::next(j))) {
                     ++j;
                 }
 
@@ -55,4 +86,4 @@ namespace cs {
     };
 }
 
-#endif // PRIORITYQUEUE_HPP
+#endif // HEAP_HPP

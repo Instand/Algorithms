@@ -6,3 +6,4 @@
 /debug
 /release
 /CMakeLists.txt.user
+/structures/priorityqueue.hpp

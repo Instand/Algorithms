@@ -16,28 +16,28 @@
 namespace cs {
     template <typename Iter>
     void merge(Iter begin, Iter medium, Iter end) {
-      using Value = typename Iter::value_type;
+        using Value = typename Iter::value_type;
 
-      std::vector<Value> first(begin, medium);
-      std::vector<Value> second(medium, end);
+        std::vector<Value> first(begin, medium);
+        std::vector<Value> second(medium, end);
 
-      auto firstBegin = first.begin();
-      auto secondBegin = second.begin();
+        auto firstBegin = first.begin();
+        auto secondBegin = second.begin();
 
-      for (auto iter = begin; iter != end; ++iter) {
-          if (firstBegin == first.end()) {
-              std::iter_swap(iter, secondBegin++);
-          }
-          else if (secondBegin == second.end()) {
-              std::iter_swap(iter, firstBegin++);
-          }
-          else if ((*firstBegin) < (*secondBegin)) {
-              std::iter_swap(firstBegin++, iter);
-          }
-          else {
-              std::iter_swap(secondBegin++, iter);
-          }
-      }
+        for (auto iter = begin; iter != end; ++iter) {
+            if (firstBegin == first.end()) {
+                std::iter_swap(iter, secondBegin++);
+            }
+            else if (secondBegin == second.end()) {
+                std::iter_swap(iter, firstBegin++);
+            }
+            else if ((*firstBegin) < (*secondBegin)) {
+                std::iter_swap(firstBegin++, iter);
+            }
+            else {
+                std::iter_swap(secondBegin++, iter);
+            }
+        }
     }
 
     template <typename Iterator>

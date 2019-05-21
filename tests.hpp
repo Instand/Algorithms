@@ -5,6 +5,7 @@
 
 #include <helper/linkedlisttests.hpp>
 #include <helper/heaptests.hpp>
+#include <helper/priorityqueuetests.hpp>
 
 #include <helper/algorithmstests.hpp>
 #include <helper/sortstests.hpp>
@@ -22,8 +23,14 @@ namespace cs {
     }
 
     void testHeap() {
-        Framework::execute(&cs::HeapTests::testFixUp, "Fix up tests failed");
-        Framework::execute(&cs::HeapTests::testFixDown, "Fix down tests failed");
+        Framework::execute(&cs::HeapTests::testHeapCreation, "Heap creation tests failed", 100);
+        Framework::execute(&cs::HeapTests::testFixUp, "Fix up tests failed", 10);
+        Framework::execute(&cs::HeapTests::testFixDown, "Fix down tests failed", 10);
+    }
+
+    void testPriorityQueue() {
+        Framework::execute(&cs::PriorityQueueTests::testPush, "Priority queue push test failed");
+        Framework::execute(&cs::PriorityQueueTests::testPop, "Priority queue pop test failed");
     }
 
     void testSorts() {
@@ -53,6 +60,7 @@ namespace cs {
         void run() {
             testLinkedList();
             testHeap();
+            testPriorityQueue();
             testSorts();
             testAlgorithms();
             testTasks();
