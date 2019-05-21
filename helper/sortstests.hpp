@@ -9,6 +9,7 @@
 #include <sort/selectionsort.hpp>
 #include <sort/insertionsort.hpp>
 #include <sort/mergesort.hpp>
+#include <sort/heapsort.hpp>
 
 #include <algorithm>
 #include <vector>
@@ -94,6 +95,10 @@ namespace cs {
 
         static bool testMergeSort() {
             return Sort::start<Func>(&cs::mergeSort<Iter>, "Merge sort");
+        }
+
+        static bool testHeapSort() {
+            return Sort::start<Func>(&cs::heapSort<Iter>, "Heap sort");
         }
     };
 }

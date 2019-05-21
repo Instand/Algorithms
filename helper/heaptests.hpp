@@ -15,6 +15,27 @@ namespace cs {
             return Heap::checkHeap(vector.begin(), vector.end());
         }
 
+        static bool testMakeHeap() {
+            constexpr size_t count = 10;
+            constexpr int min = 0;
+            constexpr int max = 1000;
+
+            cs::Console::writeLine("Make heap test started");
+
+            std::vector<int> container;
+
+            for (size_t i = 0; i < count; ++i) {
+                container.push_back(Generator::generateRandomValue(min, max));
+            }
+
+            cs::Heap::makeHeap(container.begin(), container.end());
+
+            cs::Console::print(container);
+            cs::Console::writeLine("Make heap test finished");
+
+            return Heap::checkHeap(container.begin(), container.end());
+        }
+
         static bool testFixUp() {
             cs::Console::writeLine("Fix up test started");
 

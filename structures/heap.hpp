@@ -83,6 +83,20 @@ namespace cs {
                 b = j;
             }
         }
+
+        template<typename Iter>
+        static void makeHeap(Iter begin, Iter end) {
+            if (begin == end) {
+                return;
+            }
+
+            auto length = std::distance(begin, end);
+            auto index = length/2;
+
+            for (auto b = std::prev(end); b >= begin; --b) {
+                Heap::fixDown(b, end);
+            }
+        }
     };
 }
 

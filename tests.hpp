@@ -26,6 +26,7 @@ namespace cs {
         Framework::execute(&cs::HeapTests::testHeapCreation, "Heap creation tests failed", 100);
         Framework::execute(&cs::HeapTests::testFixUp, "Fix up tests failed", 10);
         Framework::execute(&cs::HeapTests::testFixDown, "Fix down tests failed", 10);
+        Framework::execute(&cs::HeapTests::testMakeHeap, "Make heap tests failed", 10);
     }
 
     void testPriorityQueue() {
@@ -40,6 +41,7 @@ namespace cs {
         Framework::execute(&cs::SortsTests::testSelectionSort, "Selection sort tests failed");
         Framework::execute(&cs::SortsTests::testInsertionSort, "Insertion sort tests failed");
         Framework::execute(&cs::SortsTests::testMergeSort, "Merge sort tests failed");
+        Framework::execute(&cs::SortsTests::testHeapSort, "Heap sort tests failed");
     }
 
     void testAlgorithms() {
