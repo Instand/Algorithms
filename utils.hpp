@@ -20,21 +20,37 @@ namespace cs {
     };
 
     struct Generator {
-        enum Style {
-            CStyle,
-            CppStyle
-        };
+        inline static Initializer initializer;
 
-        static int generateRandomValue(int min, int max, Style style = Style::CppStyle) {
-            [[maybe_unused]] static Initializer initializer;
+        static int generateRandomValue(int min, int max) {
+            static std::default_random_engine engine(Initializer::seed);
+            std::uniform_int_distribution<int> distribution(min, max);
 
-            if (style == Style::CppStyle) {
-                static std::default_random_engine engine(Initializer::seed);
-                std::uniform_int_distribution<int> distribution(min, max);
-                return distribution(engine);
+            return distribution(engine);
+        }
+
+        template<typename T>
+        static T generateRandomValue(T min, T max) {
+            static std::default_random_engine engine(Initializer::seed);
+
+            if constexpr (std::is_floating_point_v<T>) {
+                std::uniform_real_distribution<T> distribution(min, max);
+                return static_cast<T>(distribution(engine));
             }
 
-            return (min + (std::rand() % (max - min + 1)));
+            std::uniform_int_distribution<T> distribution(min, max);
+            return static_cast<T>(distribution(engine));
+        }
+
+        template<typename T>
+        static std::vector<T> generateCollection(T min, T max, size_t count) {
+            std::vector<T> container;
+
+            for (size_t i = 0; i < count; ++i) {
+                container.push_back(Generator::generateRandomValue<T>(min, max));
+            }
+
+            return container;
         }
     };
 

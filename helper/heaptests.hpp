@@ -22,11 +22,7 @@ namespace cs {
 
             cs::Console::writeLine("Make heap test started");
 
-            std::vector<int> container;
-
-            for (size_t i = 0; i < count; ++i) {
-                container.push_back(Generator::generateRandomValue(min, max));
-            }
+            auto container = Generator::generateCollection<int>(min, max, count);
 
             cs::Heap::makeHeap(container.begin(), container.end());
 
