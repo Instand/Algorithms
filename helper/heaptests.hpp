@@ -78,12 +78,12 @@ namespace cs {
         }
 
     private:
-        static std::vector<int> createHeap() {
+        static std::vector<int> createHeap(int maxValue = 100) {
             std::vector<int> heap;
-            constexpr size_t size = 10;
+            constexpr size_t size = 20;
 
             for (size_t i = 0; i < size; ++i) {
-                heap.push_back(cs::Generator::generateRandomValue(0, 100));
+                heap.push_back(cs::Generator::generateRandomValue(0, maxValue));
                 Heap::fixUp(heap.begin(), heap.end());
             }
 

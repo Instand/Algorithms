@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include <helper/linkedlisttests.hpp>
+#include <helper/forwardlisttests.hpp>
 #include <helper/heaptests.hpp>
 #include <helper/priorityqueuetests.hpp>
 
@@ -22,11 +23,17 @@ namespace cs {
         Framework::execute(&cs::LinkedListTests::testReverse, "Linked list reverse failed");
     }
 
+    void testForwardList() {
+        Framework::execute(&cs::ForwardListTests::testPushFront, "Forward list push front test failed");
+    }
+
     void testHeap() {
-        Framework::execute(&cs::HeapTests::testHeapCreation, "Heap creation tests failed", 100);
-        Framework::execute(&cs::HeapTests::testFixUp, "Fix up tests failed", 10);
-        Framework::execute(&cs::HeapTests::testFixDown, "Fix down tests failed", 10);
-        Framework::execute(&cs::HeapTests::testMakeHeap, "Make heap tests failed", 10);
+        constexpr static size_t heapChecks = 100;
+
+        Framework::execute(&cs::HeapTests::testHeapCreation, "Heap creation tests failed", heapChecks);
+        Framework::execute(&cs::HeapTests::testFixUp, "Fix up tests failed", heapChecks);
+        Framework::execute(&cs::HeapTests::testFixDown, "Fix down tests failed", heapChecks);
+        Framework::execute(&cs::HeapTests::testMakeHeap, "Make heap tests failed", heapChecks);
     }
 
     void testPriorityQueue() {
@@ -41,7 +48,7 @@ namespace cs {
         Framework::execute(&cs::SortsTests::testSelectionSort, "Selection sort tests failed");
         Framework::execute(&cs::SortsTests::testInsertionSort, "Insertion sort tests failed");
         Framework::execute(&cs::SortsTests::testMergeSort, "Merge sort tests failed");
-        Framework::execute(&cs::SortsTests::testHeapSort, "Heap sort tests failed");
+        Framework::execute(&cs::SortsTests::testHeapSort, "Heap sort tests failed", 100);
     }
 
     void testAlgorithms() {
@@ -56,11 +63,11 @@ namespace cs {
         Framework::execute(&cs::TasksTests::mergeTwoOrderedVectors, "Merge two ordered vectors failed");
     }
 
-
     class Tests {
     public:
         void run() {
             testLinkedList();
+            testForwardList();
             testHeap();
             testPriorityQueue();
             testSorts();

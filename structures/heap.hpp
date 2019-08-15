@@ -7,6 +7,20 @@
 #include <utils.hpp>
 
 namespace cs {
+    namespace helper {
+        template<typename Iter>
+        constexpr Iter left(Iter begin, typename std::iterator_traits<Iter>::difference_type index) {
+            auto i = (index * 2) + 1;
+            return std::next(begin, i);
+        }
+
+        template<typename Iter>
+        constexpr Iter right(Iter begin, typename std::iterator_traits<Iter>::difference_type index) {
+            auto i = (index * 2) + 2;
+            return std::next(begin, i);
+        }
+    }
+
     class Heap {
     public:
         template<typename Iter>
@@ -90,8 +104,8 @@ namespace cs {
                 return;
             }
 
-            for (auto b = std::prev(end); b >= begin; --b) {
-                Heap::fixDown(b, end);
+            for (auto iter = std::prev(end); iter >= begin; --iter) {
+                Heap::fixDown(iter, end);
             }
         }
     };

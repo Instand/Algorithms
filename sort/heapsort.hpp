@@ -1,6 +1,7 @@
 #ifndef HEAPSORT_HPP
 #define HEAPSORT_HPP
 
+#include <algorithm>
 #include <structures/heap.hpp>
 
 // worst-case O(n log n)
@@ -18,7 +19,7 @@ namespace cs {
             return;
         }
 
-        Heap::makeHeap(begin, end);
+        std::make_heap(begin, end);
 
         for (auto e = std::prev(end); e >= begin; --e) {
             std::iter_swap(begin, e);
