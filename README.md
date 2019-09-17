@@ -1,6 +1,8 @@
 # Algorithms
 Realizations of popular data structures and algorithms in STL style. <br />
 Hand-made testing framework for testing used. <br />
+<br />
+Use any compiler with C++17 support<br />
 
 ### On Windows:<br/>
 
