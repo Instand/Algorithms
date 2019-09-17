@@ -50,6 +50,37 @@ namespace cs {
 
             return list.isEmpty();
         }
+
+        static bool testReverse() {
+            cs::Console::writeLine("Reverse test started");
+
+            constexpr size_t count = 100;
+
+            std::vector<size_t> results;
+            results.reserve(count);
+
+            for (size_t i = 0; i < count; ++i) {
+                results.push_back(i);
+            }
+
+            cs::ForwardList<size_t> list;
+
+            for (size_t i = 0; i < 100; ++i) {
+                list.pushFront(i);
+            }
+
+            list.reverse();
+
+            size_t index = 0;
+
+            for (auto e : list) {
+                if (e != results[index++]) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     };
 }
 

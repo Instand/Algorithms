@@ -85,6 +85,24 @@ namespace cs {
             --m_size;
         }
 
+        void reverse() {
+            if (size() < 2) {
+                return;
+            }
+
+            auto current = m_head->next;
+            m_head->next = nullptr;
+
+            while (current != nullptr) {
+                auto next = current->next;
+
+                current->next = m_head;
+                m_head = current;
+
+                current = next;
+            }
+        }
+
         iterator begin() {
             return iterator(m_head);
         }

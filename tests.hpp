@@ -26,6 +26,7 @@ namespace cs {
     void testForwardList() {
         Framework::execute(&cs::ForwardListTests::testPushFront, "Forward list push front test failed");
         Framework::execute(&cs::ForwardListTests::testPopFront, "Forward list pop front test failed");
+        Framework::execute(&cs::ForwardListTests::testReverse, "Forward list reverse test failed");
     }
 
     void testHeap() {
