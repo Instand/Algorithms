@@ -73,6 +73,18 @@ namespace cs {
             ++m_size;
         }
 
+        void popFront() {
+            if (isEmpty()) {
+                return;
+            }
+
+            auto temp = m_head;
+            m_head = temp->next;
+
+            delete temp;
+            --m_size;
+        }
+
         iterator begin() {
             return iterator(m_head);
         }

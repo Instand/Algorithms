@@ -11,7 +11,7 @@ namespace cs {
     class ForwardListTests {
     public:
         static bool testPushFront() {
-            cs::Console::writeLine("Push back test started");
+            cs::Console::writeLine("Push front test started");
 
             cs::ForwardList<size_t> forwardList;
 
@@ -33,6 +33,22 @@ namespace cs {
             }
 
             return true;
+        }
+
+        static bool testPopFront() {
+            cs::Console::writeLine("Pop front test started");
+
+            cs::ForwardList<size_t> list;
+
+            for (size_t i = 0; i < 100; ++i) {
+                list.pushFront(i);
+            }
+
+            for (size_t i = 0; i < 100; ++i) {
+                list.popFront();
+            }
+
+            return list.isEmpty();
         }
     };
 }
