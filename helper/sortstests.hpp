@@ -21,23 +21,23 @@ namespace cs {
 
     class Collection {
     public:
-        using iterator = std::vector<int>::iterator;
-        using array = std::vector<int>::value_type[];
+        using Type = int;
+        using Iterator = std::vector<int>::iterator;
+        using Array = Type[];
 
     private:
-        static std::vector<int> generate() {
+        template<typename T>
+        static auto generate() {
             constexpr size_t size = 20;
             constexpr int min = 0;
             constexpr int max = 10000;
 
-            std::vector<int> result;
-            result.reserve(size);
-
-            for (size_t i = 0; i < size; ++i) {
-                result.push_back(cs::Generator::generateRandomValue(min, max));
+            if constexpr (std::is_same_v<T, Array>) {
+                return cs::Generator::generateArray<Type>(min, max, size);
             }
-
-            return result;
+            else {
+                return cs::Generator::generateCollection<Type>(min, max, size);
+            }
         }
 
         friend class Sort;
@@ -45,9 +45,9 @@ namespace cs {
 
     class Sort {
     public:
-        template<typename T, typename U = typename Collection::iterator>
+        template<typename T, typename U = typename Collection::Iterator>
         static bool start(T sort, const std::string& name) {
-            auto collection = Collection::generate();
+            auto collection = Collection::generate<U>();
 
             cs::Console::writeLine("Start ", name, " tests");
 
@@ -55,7 +55,7 @@ namespace cs {
             cs::Console::print(collection);
 
             if constexpr (std::is_array_v<U>) {
-                sort(collection.data(), collection.size());
+                sort(collection.first.get(), collection.second);
             }
             else {
                 sort(collection.begin(), collection.end());
@@ -64,12 +64,17 @@ namespace cs {
             cs::Console::writeLine("After sort: ");
             cs::Console::print(collection);
 
-            return std::is_sorted(collection.begin(), collection.end());
+            if constexpr (std::is_array_v<U>) {
+                return std::is_sorted(collection.first.get(), collection.first.get() + collection.second);
+            }
+            else {
+                return std::is_sorted(collection.begin(), collection.end());
+            }
         }
     };
 
     class SortsTests {
-        using Iter = Collection::iterator;
+        using Iter = Collection::Iterator;
         using Func = std::function<void(Iter, Iter)>;
 
     public:

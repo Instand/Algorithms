@@ -6,6 +6,7 @@
 #include <random>
 #include <string>
 #include <chrono>
+#include <memory>
 
 #define forever for(;;)
 #define unused(x) (void)(x)
@@ -52,6 +53,17 @@ namespace cs {
 
             return container;
         }
+
+        template<typename T>
+        static std::pair<std::unique_ptr<T[]>, size_t> generateArray(T min, T max, size_t count) {
+            std::unique_ptr<T[]> array(new T[count]);
+
+            for (size_t i = 0; i < count; ++i) {
+                array[i] = Generator::generateRandomValue<T>(min, max);
+            }
+
+            return std::make_pair(std::move(array), count);
+        }
     };
 
     namespace helper {
@@ -96,6 +108,11 @@ namespace cs {
         static void print(const std::string& message, const T& container) {
             std::cout << message << ", size: " << container.size() << ", values ";
             print(container);
+        }
+
+        template<typename T>
+        static void print(std::shared_ptr<T> container) {
+            cs::Console::print(*container.get());
         }
 
         template <typename T>
