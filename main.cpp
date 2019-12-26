@@ -1,9 +1,7 @@
-#include <iostream>
-#include <tests.hpp>
+#include "gtest/gtest.h"
 
-int main() {
-    cs::Tests tests;
-    tests.run();
-
-    return 0;
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    int ret = RUN_ALL_TESTS();
+    return ret;
 }
