@@ -20,3 +20,28 @@ TEST(BinarySearchTree, TestInsert) {
 
     ASSERT_EQ(tree.size(), 2);
 }
+
+TEST(BinarySearchTree, TestNonRecursiveVisit) {
+    cs::BinarySearchTree<size_t, size_t> tree;
+
+    tree.insert(20, 20);
+    tree.insert(10, 10);
+    tree.insert(30, 30);
+    tree.insert(5, 5);
+    tree.insert(15, 15);
+    tree.insert(25, 25);
+    tree.insert(35, 35);
+
+    ASSERT_EQ(tree.size(), 7);
+
+    size_t visitCount = 0;
+
+    tree.nonRecursiveVisit([&](size_t key, size_t value) {
+        cs::Console::writeLine("Key ", key);
+        cs::Console::writeLine("Value ", value);
+
+        visitCount++;
+    });
+
+    ASSERT_EQ(visitCount, tree.size());
+}

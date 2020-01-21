@@ -1,6 +1,7 @@
 #ifndef BINARYSEARCHTREE_HPP
 #define BINARYSEARCHTREE_HPP
 
+#include <stack>
 #include <functional>
 
 // does not allow multiple keys
@@ -39,6 +40,11 @@ namespace cs {
             visitImpl(func, m_root);
         }
 
+        template<typename Func>
+        void nonRecursiveVisit(const Func& func) const {
+            nonRecursiveVisitImpl(func, m_root);
+        }
+
         size_t size() const {
             return m_size;
         }
@@ -54,6 +60,27 @@ namespace cs {
 
             visitImpl(func, node->left);
             visitImpl(func, node->right);
+        }
+
+        template<typename Func>
+        void nonRecursiveVisitImpl(const Func& func, Node* node) const {
+            std::stack<Node*> stack;    // change to std::queue and rotate left right node pushing to implement level visit
+            stack.push(node);
+
+            while (!stack.empty()) {
+                node = stack.top();
+                stack.pop();
+
+                func(node->key, node->value);
+
+                if (node->right != nullptr) {
+                    stack.push(node->right);
+                }
+
+                if (node->left != nullptr) {
+                    stack.push(node->left);
+                }
+            }
         }
 
         Node** search(Node** node, const T& key) const {
