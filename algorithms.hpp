@@ -43,15 +43,11 @@ namespace cs {
 
         template<typename Iter, typename T>
         static Iter binarySearch(Iter begin, Iter end, const T& value) {
-            std::stack<std::pair<Iter, Iter>> stack;
-            stack.push(std::make_pair(begin, end));
-
+            Iter b = begin;
+            Iter e = end;
             size_t index = 0;
 
             do {
-                auto [b, e] = stack.top();
-                stack.pop();
-
                 index = std::distance(b, e) / 2;
                 auto iter = std::next(b, index);
 
@@ -59,10 +55,10 @@ namespace cs {
                     return iter;
                 }
                 else if (*iter < value) {
-                    stack.push(std::make_pair(b, iter));
+                    e = iter;
                 }
                 else {
-                    stack.push(std::make_pair(iter, e));
+                    b = iter;
                 }
             } while (index != 0);
 
