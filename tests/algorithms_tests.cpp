@@ -67,3 +67,15 @@ TEST(Algorithms, TestSwap) {
     ASSERT_EQ(expected1, v1);
     ASSERT_EQ(expected2, v2);
 }
+
+TEST(Algorithms, TestBinarySearch) {
+    std::vector<size_t> vector = { 1, 2, 4, 10, 15, 20, 100, 1000, 2000 };
+    size_t expectedValue = 15;
+
+    auto iter = cs::Algorithms::binarySearch(std::begin(vector), std::end(vector), expectedValue);
+    ASSERT_EQ(*iter, expectedValue);
+
+    size_t notExistsValue = 999;
+    auto i = cs::Algorithms::binarySearch(std::begin(vector), std::end(vector), notExistsValue);
+    ASSERT_EQ(i, std::end(vector));
+}

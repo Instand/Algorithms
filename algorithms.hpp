@@ -4,6 +4,7 @@
 #include <utility>
 #include <vector>
 #include <iterator>
+#include <stack>
 
 namespace cs {
     struct Algorithms {
@@ -38,6 +39,34 @@ namespace cs {
             T temp = std::move(lhs);
             lhs = std::move(rhs);
             rhs = std::move(temp);
+        }
+
+        template<typename Iter, typename T>
+        static Iter binarySearch(Iter begin, Iter end, const T& value) {
+            std::stack<std::pair<Iter, Iter>> stack;
+            stack.push(std::make_pair(begin, end));
+
+            size_t index = 0;
+
+            do {
+                auto [b, e] = stack.top();
+                stack.pop();
+
+                index = std::distance(b, e) / 2;
+                auto iter = std::next(b, index);
+
+                if (*iter == value) {
+                    return iter;
+                }
+                else if (*iter < value) {
+                    stack.push(std::make_pair(b, iter));
+                }
+                else {
+                    stack.push(std::make_pair(iter, e));
+                }
+            } while (index != 0);
+
+            return end;
         }
 
         static bool isHex(const std::string& str) {
