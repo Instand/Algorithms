@@ -11,8 +11,9 @@ namespace cs {
         template<typename T>
         static void removeEverySecondElement(T& container) {
             int size = static_cast<int>(container.size());
+            int start = (size % 2 == 0) ? size - 1 : size - 2;
 
-            for (int i = size - 1; i > 0; i -= 2) {
+            for (int i = start; i > 0; i -= 2) {
                 container.erase(std::next(container.begin(), i));
             }
         }
