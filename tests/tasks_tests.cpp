@@ -31,7 +31,7 @@ TEST(Task, TestRemoveEverySecondElement) {
         1, 2, 3, 4, 5, 6, 7, 8, 9
     };
 
-    std::vector<int> expetctedData = {
+    std::vector<int> expectedData = {
         1, 3, 5, 7, 9
     };
 
@@ -41,7 +41,7 @@ TEST(Task, TestRemoveEverySecondElement) {
     cs::Console::size(data);
     cs::Console::print(data);
 
-    ASSERT_EQ(data, expetctedData);
+    ASSERT_EQ(data, expectedData);
 }
 
 TEST(Task, TestMergeTwoOrderedVectors) {
