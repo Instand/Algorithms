@@ -45,3 +45,15 @@ TEST(BinarySearchTree, TestNonRecursiveVisit) {
 
     ASSERT_EQ(visitCount, tree.size());
 }
+
+TEST(BinarySearchTree, TestHeight) {
+    cs::BinarySearchTree<int, int> tree;
+
+    tree.insert(10, 10);
+    tree.insert(5, 5);
+    tree.insert(15, 15);
+    tree.insert(1, 1);
+    tree.insert(20, 20);
+
+    ASSERT_EQ(2, tree.height());
+}

@@ -5,6 +5,7 @@
 #include <functional>
 
 // does not allow multiple keys
+// size realizaed as recursive version
 
 namespace cs {
     template<typename T, typename Value, typename Comparer = std::less<T>>
@@ -23,8 +24,6 @@ namespace cs {
             if ((*node) == nullptr) {
                 (*node) = new Node();
                 (*node)->key = key;
-
-                ++m_size;
             }
 
             (*node)->value = value;
@@ -46,7 +45,12 @@ namespace cs {
         }
 
         size_t size() const {
-            return m_size;
+            return sizeImpl(m_root);
+        }
+
+        size_t height() const {
+            auto h = heightImpl(m_root);
+            return h == -1 ? 0 : static_cast<size_t>(h);
         }
 
     private:
@@ -88,10 +92,28 @@ namespace cs {
                 return node;
             }
 
-            return (m_comparer((*node)->key, key) ? search(&((*node)->right), key) : search(&((*node)->left), key));
+            return (m_comparer(key, (*node)->key) ? search(&((*node)->left), key) : search(&((*node)->right), key));
         }
 
-        size_t m_size = 0;
+        size_t sizeImpl(Node* node) const {
+            if (node == nullptr) {
+                return 0;
+            }
+
+            return sizeImpl(node->left) + sizeImpl(node->right) + 1;
+        }
+
+        int heightImpl(Node* node) const {
+            if (node == nullptr) {
+                return -1;
+            }
+
+            auto left = heightImpl(node->left);
+            auto right = heightImpl(node->right);
+
+            return (left > right) ? left + 1 : right + 1;
+        }
+
         Node* m_root = nullptr;
         Comparer m_comparer = Comparer();
     };
