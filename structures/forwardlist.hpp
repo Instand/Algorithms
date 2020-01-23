@@ -32,11 +32,11 @@ namespace cs {
                 return *this;
             }
 
-            bool operator==(const Iterator& iter) {
+            bool operator==(const Iterator& iter) const {
                 return iter.m_node == m_node;
             }
 
-            bool operator!=(const Iterator& iter) {
+            bool operator!=(const Iterator& iter) const {
                 return !((*this) == iter);
             }
 

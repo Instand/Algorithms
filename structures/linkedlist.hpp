@@ -28,11 +28,11 @@ namespace cs {
                 return m_node->data;
             }
 
-            bool operator==(const Iterator& iterator) {
+            bool operator==(const Iterator& iterator) const {
                 return iterator.m_node == m_node;
             }
 
-            bool operator!=(const Iterator& iterator) {
+            bool operator!=(const Iterator& iterator) const {
                 return !((*this) == iterator);
             }
 
