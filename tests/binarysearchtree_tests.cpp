@@ -64,18 +64,23 @@ TEST(BinarySearchTree, TestHeight) {
 
         tree.insertRoot(10, 10);
         cs::Console::writeLine("Root ", tree.root());
+        ASSERT_EQ(10, tree.root());
 
         tree.insertRoot(5, 5);
         cs::Console::writeLine("Root ", tree.root());
+        ASSERT_EQ(5, tree.root());
 
         tree.insertRoot(15, 15);
         cs::Console::writeLine("Root ", tree.root());
+        ASSERT_EQ(15, tree.root());
 
         tree.insertRoot(1, 1);
         cs::Console::writeLine("Root ", tree.root());
+        ASSERT_EQ(1, tree.root());
 
         tree.insertRoot(20, 20);
         cs::Console::writeLine("Root ", tree.root());
+        ASSERT_EQ(20, tree.root());
 
         ASSERT_EQ(4, tree.height());
     }
