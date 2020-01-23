@@ -47,13 +47,36 @@ TEST(BinarySearchTree, TestNonRecursiveVisit) {
 }
 
 TEST(BinarySearchTree, TestHeight) {
-    cs::BinarySearchTree<int, int> tree;
+    {
+        cs::BinarySearchTree<int, int> tree;
 
-    tree.insert(10, 10);
-    tree.insert(5, 5);
-    tree.insert(15, 15);
-    tree.insert(1, 1);
-    tree.insert(20, 20);
+        tree.insert(10, 10);
+        tree.insert(5, 5);
+        tree.insert(15, 15);
+        tree.insert(1, 1);
+        tree.insert(20, 20);
 
-    ASSERT_EQ(2, tree.height());
+        ASSERT_EQ(2, tree.height());
+    }
+
+    {
+        cs::BinarySearchTree<int, int> tree;
+
+        tree.insertRoot(10, 10);
+        cs::Console::writeLine("Root ", tree.root());
+
+        tree.insertRoot(5, 5);
+        cs::Console::writeLine("Root ", tree.root());
+
+        tree.insertRoot(15, 15);
+        cs::Console::writeLine("Root ", tree.root());
+
+        tree.insertRoot(1, 1);
+        cs::Console::writeLine("Root ", tree.root());
+
+        tree.insertRoot(20, 20);
+        cs::Console::writeLine("Root ", tree.root());
+
+        ASSERT_EQ(4, tree.height());
+    }
 }
