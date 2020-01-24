@@ -19,7 +19,7 @@ namespace cs {
 
     public:
         void insertRoot(const T& key, const Value& value) {
-            insertImpl(&m_root, key, value);
+            insertRootImpl(&m_root, key, value);
         }
 
         void insert(const T& key, const Value& value) {
@@ -31,6 +31,10 @@ namespace cs {
             }
 
             (*node)->value = value;
+        }
+
+        void erase(const T& key) {
+            eraseImpl(&m_root, key);
         }
 
         bool contains(const T& key) const {
@@ -103,8 +107,7 @@ namespace cs {
             return (m_comparer(key, (*node)->key) ? search(&((*node)->left), key) : search(&((*node)->right), key));
         }
 
-        // insert to root
-        void insertImpl(Node** node, const T& key, const Value& value) {
+        void insertRootImpl(Node** node, const T& key, const Value& value) {
             if ((*node) == nullptr) {
                 (*node) = new Node();
                 (*node)->key = key;
@@ -119,11 +122,11 @@ namespace cs {
             }
 
             if ((*node)->key < key) {
-                insertImpl(&((*node)->left), key, value);
+                insertRootImpl(&((*node)->left), key, value);
                 rotateRight(node);
             }
             else {
-                insertImpl(&((*node)->right), key, value);
+                insertRootImpl(&((*node)->right), key, value);
                 rotateLeft(node);
             }
         }
@@ -148,6 +151,47 @@ namespace cs {
             (*node)->right = x->left;
             x->left = (*node);
             (*node) = x;
+        }
+
+        Node** min(Node** node) {
+            if ((*node)->left == nullptr) {
+                return node;
+            }
+
+            return min(&((*node)->left));
+        }
+
+        Node* joinLR(Node* left, Node* right) {
+            if (right == nullptr) {
+                return left;
+            }
+
+            Node** node = min(&right);
+            Node* root = (*node);
+            (*node) = nullptr;
+
+            root->left = left;
+            root->right = right;
+
+            return root;
+        }
+
+        void eraseImpl(Node** node, const T& key) {
+            if ((*node) == nullptr) {
+                return;
+            }
+
+            if (key < (*node)->key) {
+                eraseImpl(&((*node)->left), key);
+            }
+            else if (key > (*node)->key) {
+                eraseImpl(&((*node)->right), key);
+            }
+            else {
+                Node* n = (*node);
+                (*node) = joinLR((*node)->left, (*node)->right);
+                delete n;
+            }
         }
 
         size_t sizeImpl(Node* node) const {

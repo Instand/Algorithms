@@ -85,3 +85,25 @@ TEST(BinarySearchTree, TestHeight) {
         ASSERT_EQ(4, tree.height());
     }
 }
+
+TEST(BinarySearchTree, TestErase) {
+    cs::BinarySearchTree<int, int> tree;
+
+    tree.insert(10, 10);
+    tree.insert(8, 8);
+    tree.insert(5, 5);
+    tree.insert(15, 15);
+    tree.insert(20, 20);
+    tree.insert(11, 11);
+
+    ASSERT_EQ(10, tree.root());
+
+    tree.erase(10);
+
+    tree.visit([](int key, int value) {
+       cs::Console::writeLine("Key: ", key);
+       cs::Console::writeLine("Value: ", value);
+    });
+
+    ASSERT_EQ(11, tree.root());
+}
