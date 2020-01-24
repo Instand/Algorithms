@@ -107,3 +107,28 @@ TEST(BinarySearchTree, TestErase) {
 
     ASSERT_EQ(11, tree.root());
 }
+
+TEST(BinarySearchTree, TestJoin) {
+    cs::BinarySearchTree<int, int> tree1;
+
+    tree1.insert(10, 10);
+    tree1.insert(5, 5);
+    tree1.insert(15, 15);
+
+    cs::BinarySearchTree<int, int> tree2;
+
+    tree2.insert(8, 8);
+    tree2.insert(3, 3);
+    tree2.insert(9, 9);
+
+    tree1.join(tree2);
+
+    tree1.visit([](int key, int value) {
+        cs::Console::writeLine("Key: ", key);
+        cs::Console::writeLine("Value: ", value);
+    });
+
+    ASSERT_EQ(10, tree1.root());
+    ASSERT_EQ(tree1.size(), 6);
+    ASSERT_EQ(tree1.height(), 3);
+}

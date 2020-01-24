@@ -37,6 +37,10 @@ namespace cs {
             eraseImpl(&m_root, key);
         }
 
+        void join(cs::BinarySearchTree<T, Value, Comparer>& tree) {
+            m_root = joinImpl(m_root, tree.m_root);
+        }
+
         bool contains(const T& key) const {
             Node** node = search(&m_root, key);
             return (*node) != nullptr;
@@ -192,6 +196,24 @@ namespace cs {
                 (*node) = joinLR((*node)->left, (*node)->right);
                 delete n;
             }
+        }
+
+        Node* joinImpl(Node* left, Node* right) {
+            if (right == nullptr) {
+                return left;
+            }
+
+            if (left == nullptr) {
+                return right;
+            }
+
+            insertRootImpl(&right, left->key, left->value);
+
+            right->left = joinImpl(left->left, right->left);
+            right->right = joinImpl(left->right, right->right);
+
+            delete left;
+            return right;
         }
 
         size_t sizeImpl(Node* node) const {
